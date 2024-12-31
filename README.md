@@ -5,7 +5,7 @@
 ## 系统截图
 
 ### 主界面
-![主界面](sample.png)
+![主界面](resources/sample.png)
 - 实时市场数据概览
 - 智能选股结果列表
 - 一键导出Excel功能

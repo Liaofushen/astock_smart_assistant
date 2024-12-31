@@ -1,0 +1,87 @@
+[project]
+name = "astock-smart-assistant"
+version = "1.0.0"
+description = "一个基于 Python 的 A股智能选股工具，使用技术分析和量化交易策略，帮助投资者快速筛选优质股票。"
+authors = [
+    { name = "liaofusheng", email = "liaofusheng@outlook.com" }
+]
+dependencies = [
+    "akshare==1.15.59",
+    "pandas==2.2.3",
+    "ta-lib==0.5.2",
+    "numpy==2.2.1",
+    "streamlit==1.41.1",
+    "streamlit-echarts==0.4.0",
+    "plotly==5.18.0",
+    "pydantic==1.10.13",
+    "openpyxl==3.1.2",
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = { text = "MIT" }
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "ruff>=0.2.1",
+    "mypy>=1.8.0",
+    "coverage>=7.4.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/astock_smart_assistant"
+Repository = "https://github.com/yourusername/astock_smart_assistant.git"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra -q"
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+
+[tool.coverage.run]
+source = ["astock_smart_assistant"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError",
+]
+ignore_errors = true
+omit = [
+    "tests/*",
+    "setup.py",
+] 

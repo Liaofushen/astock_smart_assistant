@@ -1,24 +1,24 @@
 # Python 相关
-__pycache__/
 *.py[cod]
-*$py.class
+__pycache__/
 *.so
-.Python
-.venv/
-
-# 依赖目录
-node_modules/
-vendor/
-
-# 编译输出
+*.egg
+*.egg-info/
 dist/
 build/
-out/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/ 
 
 # 环境文件
-.env
-.env.local
-.env.*.local
+.venv/
+.pid
 
 # IDE 和编辑器文件
 .idea/
@@ -27,20 +27,8 @@ out/
 *.swo
 
 # 日志文件
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# 操作系统生成的文件
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-Thumbs.db
-ehthumbs.db
+logs/*
+!logs/.gitkeep
 
 # 测试覆盖率报告
 coverage/
@@ -49,4 +37,4 @@ htmlcov/
 
 # 临时文件
 tmp/
-temp/ 
+temp/
