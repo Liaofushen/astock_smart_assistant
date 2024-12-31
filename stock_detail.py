@@ -27,7 +27,7 @@ def create_stock_charts(df):
     df['成交量'] = pd.to_numeric(df['成交量'])
     
     # 设置时间索引
-    df.index = pd.to_datetime(df['时间'])
+    df.index = pd.to_datetime(df['日期'])
     df.index = df.index.tz_localize('Asia/Shanghai')  # 添加这行，确保时区正确
     
     # 计算MACD
@@ -114,19 +114,19 @@ def create_stock_charts(df):
     # 更新布局
     fig.update_layout(
         height=1000,
-        title_text="60分钟K线图表",
+        title_text="日K线图表",
         showlegend=True,
         xaxis4_rangeslider_visible=True
     )
     
-    # 设置X轴为类别类型
+    # 设置X轴为类别类型，修改时间格式
     fig.update_xaxes(
         rangeslider_visible=False,
         showgrid=True,
         gridwidth=1,
         gridcolor='LightGrey',
         type='category',
-        tickformat='%Y-%m-%d %H:%M',
+        tickformat='%Y-%m-%d',
         dtick=10
     )
     

@@ -164,12 +164,12 @@ def show_stock_details(stock_code):
             st.metric("流通市值", format_market_value(stock_info['流通市值']))
         
         # 获取分时数据并显示图表
-        hist_data = ak.stock_zh_a_hist_min_em(
+        hist_data = ak.stock_zh_a_hist(
             symbol=stock_code,
-            period='60',
-            adjust='qfq',
-            start_date=(pd.Timestamp.now() - pd.Timedelta(days=45)).strftime("%Y%m%d"),
-            end_date=pd.Timestamp.now().strftime("%Y%m%d")
+            period="daily",  # 改为日级别
+            start_date=(pd.Timestamp.now() - pd.Timedelta(days=120)).strftime("%Y%m%d"),
+            end_date=pd.Timestamp.now().strftime("%Y%m%d"),
+            adjust="qfq"
         )
         
         if not hist_data.empty:
