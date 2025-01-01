@@ -3,8 +3,8 @@ import io
 import akshare as ak
 import pandas as pd
 import streamlit as st
-from stock_detail import create_stock_charts
-from stock_screener import StockScreener
+from .stock_detail import create_stock_charts
+from .stock_screener import StockScreener
 
 index_titles = [
     '股票代码',

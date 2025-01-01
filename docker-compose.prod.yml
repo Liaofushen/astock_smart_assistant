@@ -1,0 +1,8 @@
+# 生产环境特定配置
+version: '3'
+services:
+  app:
+    restart: always
+    environment:
+      - ENV=production
+      - DEBUG=false 
