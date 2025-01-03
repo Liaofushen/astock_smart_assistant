@@ -160,20 +160,44 @@ class StockScreener:
                     positive_signals['回调到支撑位'] = 10  # 回调到支撑位
 
             # 2. 量价配合分析 (40分)
-            # 计算最近5天的量价关系
-            for i in range(-5, 0):
+            # 计算连续放量上涨的情况
+            consecutive_volume_up = 0
+            consecutive_price_up = 0
+            
+            # 先检查最近一天的情况
+            latest_price_change = (close[-1] - close[-2]) / close[-2]
+            latest_vol_change = volume[-1] / vol_ma5[-1]
+            
+            # 当天缩量超过20%要给予警示
+            if latest_vol_change < 0.8:
+                negative_signals['当天缩量警示'] = 15
+            
+            # 分析前几天的趋势
+            for i in range(-5, -1):  # 注意这里改为-1，不包含最后一天
                 price_change = (close[i] - close[i - 1]) / close[i - 1]
                 vol_change = volume[i] / vol_ma5[i]
-
-                # 上涨放量
-                if price_change > 0 and vol_change > 1.2:
-                    positive_signals['上涨放量'] = 8
-                # 下跌缩量
-                elif price_change < 0 and vol_change < 0.8:
-                    positive_signals['下跌缩量'] = 5
-                # 下跌放量（卖压大）
-                elif price_change < 0 and vol_change > 1.5:
-                    negative_signals['下跌放量'] = 10
+                
+                # 连续放量且价格不跌的情况
+                if vol_change > 1.2 and price_change >= -0.01:
+                    consecutive_volume_up += 1
+                    if price_change > 0:
+                        consecutive_price_up += 1
+                else:
+                    consecutive_volume_up = 0
+                    consecutive_price_up = 0
+            
+            # 评分逻辑
+            if consecutive_volume_up >= 2:
+                if latest_vol_change < 0.8:  # 前期放量但当天缩量
+                    negative_signals['放量后缩量转折'] = 20
+                elif latest_vol_change > 1.2 and latest_price_change > 0:  # 持续放量上涨
+                    positive_signals['持续放量上涨'] = 8 + consecutive_volume_up * 2
+            
+            # 其他量价组合
+            if latest_price_change < 0 and latest_vol_change < 0.8:
+                positive_signals['下跌缩量'] = 5
+            elif latest_price_change < 0 and latest_vol_change > 1.5:
+                negative_signals['下跌放量'] = 10
 
             # 3. 承接力度分析 (20分)
             for i in range(-5, -1):  # 使用更多的历史数据

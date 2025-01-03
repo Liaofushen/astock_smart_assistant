@@ -1,8 +1,18 @@
 # 生产环境特定配置
 version: '3'
+
+volumes:
+  data:
+  logs:
+
 services:
   app:
     restart: always
+    volumes:
+      - data:/app/data
+      - logs:/app/logs
     environment:
       - ENV=production
-      - DEBUG=false 
+      - DEBUG=false
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1 
