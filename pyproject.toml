@@ -3,18 +3,19 @@ name = "astock-smart-assistant"
 version = "1.0.0"
 description = "一个基于 Python 的 A股智能选股工具，使用技术分析和量化交易策略，帮助投资者快速筛选优质股票。"
 authors = [
-    { name = "liaofusheng", email = "liaofusheng@outlook.com" }
+    { name = "liaofushen", email = "liaofushen@outlook.com" }
 ]
 dependencies = [
-    "akshare==1.15.59",
-    "pandas==2.2.3",
-    "ta-lib==0.5.2",
-    "numpy==2.2.1",
-    "streamlit==1.41.1",
-    "streamlit-echarts==0.4.0",
-    "plotly==5.18.0",
-    "pydantic==1.10.13",
-    "openpyxl==3.1.2",
+    "akshare>=1.15.59,<1.16.0",
+    "pandas>=2.2.3,<2.3.0",
+    "ta-lib>=0.5.2,<0.6.0",
+    "numpy>=1.21.0,<2.1.0",
+    "streamlit>=1.41.1,<1.42.0",
+    "streamlit-echarts>=0.4.0,<0.5.0",
+    "plotly>=5.18.0,<5.19.0",
+    "pydantic>=1.10.13,<1.11.0",
+    "openpyxl>=3.1.2,<3.2.0",
+    "vectorbt>=0.27.1,<0.28.0",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -22,10 +23,19 @@ license = { text = "MIT" }
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.4.0",
-    "ruff>=0.2.1",
-    "mypy>=1.8.0",
-    "coverage>=7.4.1",
+    "ruff>=0.2.1,<0.3.0",
+    "mypy>=1.8.0,<1.9.0",
+]
+test = [
+    "pytest>=7.4.0,<7.5.0",
+    "coverage>=7.4.1,<7.5.0",
+]
+docs = [
+    "sphinx>=7.0.0,<8.0.0",
+    "sphinx-rtd-theme>=1.3.0",
+]
+all = [
+    "astock-smart-assistant[dev,test,docs]",
 ]
 
 [project.urls]

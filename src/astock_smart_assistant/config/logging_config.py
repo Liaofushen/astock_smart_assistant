@@ -45,7 +45,7 @@ LOGGING_CONFIG = {
         },
     },
     "loggers": {
-        "astock_assistant": {
+        "astock_smart_assistant": {
             "level": os.getenv("LOG_LEVEL", "INFO"),
             "handlers": ["console", "file", "error_file"],
             "propagate": False
@@ -60,4 +60,4 @@ LOGGING_CONFIG = {
 def setup_logging():
     """设置日志配置"""
     logging.config.dictConfig(LOGGING_CONFIG)
-    return logging.getLogger("astock_assistant") 
+    return logging.getLogger("astock_smart_assistant") 

@@ -50,7 +50,7 @@ start() {
     fi
     
     echo -e "${BLUE}Starting application...${NC}"
-    nohup streamlit run src/astock_assistant/app.py > "$LOG_FILE" 2>&1 &
+    nohup streamlit run src/astock_smart_assistant/app.py > "$LOG_FILE" 2>&1 &
     echo $! > "$PID_FILE"
     echo -e "${GREEN}Application started! PID: $(cat $PID_FILE)${NC}"
 }

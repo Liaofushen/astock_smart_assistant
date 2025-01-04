@@ -1,5 +1,5 @@
 import pytest
-from astock_assistant.stock_screener import StockScreener
+from astock_smart_assistant.stock_screener import StockScreener
 
 @pytest.fixture
 def stock_screener():

@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ../..
+      dockerfile: .docker/${APP_ENV}/Dockerfile
+      cache_from:
+        - python:3.12
+        - python:3.12-slim
+    ports:
+      - "${APP_PORT}:8501"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: ${HEALTHCHECK_INTERVAL}
+      timeout: ${HEALTHCHECK_TIMEOUT}
+      retries: ${HEALTHCHECK_RETRIES}

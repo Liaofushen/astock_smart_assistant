@@ -39,6 +39,44 @@
 
 ## 安装说明
 
+### 方法一：使用 uv（推荐）
+
+1. 安装 uv
+```bash
+pip install uv
+```
+
+2. 克隆项目
+```bash
+git clone https://github.com/yourusername/astock_smart_assistant.git
+cd astock_smart_assistant
+```
+
+3. 创建虚拟环境并激活
+```bash
+uv venv
+source .venv/bin/activate  # Linux/Mac
+# 或
+.venv\Scripts\activate     # Windows
+```
+
+4. 安装依赖
+```bash
+# 仅安装基础依赖
+uv sync
+
+# 安装开发依赖（包含代码检查工具）
+uv sync -e .[dev]
+
+# 安装测试依赖
+uv sync -e .[test]
+
+# 安装所有依赖（开发、测试、文档等）
+uv sync -e .[all]
+```
+
+### 方法二：使用 pip
+
 1. 克隆项目
 ```bash
 git clone https://github.com/yourusername/astock_smart_assistant.git
@@ -52,17 +90,37 @@ python -m venv .venv
 
 3. 激活虚拟环境
 ```bash
-# Windows
-.venv\Scripts\activate
-
 # Linux/Mac
 source .venv/bin/activate
+
+# Windows
+.venv\Scripts\activate
 ```
 
-4. 安装依赖
+4. 安装构建依赖
 ```bash
-pip install -r requirements.txt
+pip install build
 ```
+
+5. 安装项目及依赖
+```bash
+# 仅安装基础依赖
+pip install .
+
+# 以可编辑模式安装（推荐开发时使用）
+pip install -e .
+
+# 安装开发依赖
+pip install -e .[dev]
+
+# 安装所有依赖
+pip install -e .[all]
+```
+
+注意：
+- 使用 `pip install .` 会从 pyproject.toml 读取依赖信息
+- 开发时建议使用 `-e` 参数以可编辑模式安装，这样源码修改后无需重新安装
+- 如果遇到依赖冲突，可以尝试使用 `pip install --no-deps .` 然后手动安装依赖
 
 ## 使用说明
 
@@ -95,19 +153,31 @@ astock_smart_assistant/
 └── .gitignore         # Git忽略文件
 ```
 
-## 依赖版本
+## 依赖说明
 
-```
-akshare==1.15.59
-pandas==2.2.3
-ta-lib==0.5.2
-numpy==2.2.1
-streamlit==1.41.1
-streamlit-echarts==0.4.0
-plotly==5.18.0
-pydantic==1.10.13
-openpyxl==3.1.2
-```
+本项目使用 pyproject.toml 管理依赖，主要依赖包括：
+
+### 核心依赖
+- akshare >= 1.15.59
+- pandas >= 2.2.3
+- ta-lib >= 0.5.2
+- numpy >= 1.21.0
+- streamlit >= 1.41.1
+- streamlit-echarts >= 0.4.0
+- plotly >= 5.18.0
+- pydantic >= 1.10.13
+- openpyxl >= 3.1.2
+- vectorbt >= 0.27.1
+
+### 开发依赖
+- ruff >= 0.2.1 (代码检查)
+- mypy >= 1.8.0 (类型检查)
+
+### 测试依赖
+- pytest >= 7.4.0
+- coverage >= 7.4.1
+
+完整的依赖列表和版本约束请参考 pyproject.toml 文件。
 
 ## 注意事项
 

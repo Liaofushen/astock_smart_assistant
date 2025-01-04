@@ -1,5 +1,5 @@
 # 构建阶段
-FROM python:3.13 as builder
+FROM python:3.12 as builder
 
 # 编译安装 ta-lib
 WORKDIR /build
@@ -19,11 +19,11 @@ RUN uv pip compile pyproject.toml > requirements.txt && \
     uv pip install --system -r requirements.txt
 
 # 运行阶段
-FROM python:3.13-slim
+FROM python:3.12-slim
 # 复制编译好的 ta-lib 库
 COPY --from=builder /usr/lib/libta_lib* /usr/lib/
 # 复制 Python 包
-COPY --from=builder /usr/local/lib/python3.13/site-packages/ /usr/local/lib/python3.13/site-packages/
+COPY --from=builder /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
 
 WORKDIR /app
 COPY ./src /app/src
@@ -34,4 +34,4 @@ ENV PYTHONUNBUFFERED=1 \
     ENV=production
 
 EXPOSE 8501
-CMD ["python", "-m", "streamlit", "run", "src/astock_assistant/app.py"] 
+CMD ["python", "-m", "streamlit", "run", "src/astock_smart_assistant/app.py"] 
